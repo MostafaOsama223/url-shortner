@@ -3,8 +3,9 @@ package service
 import (
 	"fmt"
 	"log"
-	"math/rand"
 	"shortner-service/repo"
+
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type UrlService struct {
@@ -21,22 +22,16 @@ func NewUrlService(urlRepo *repo.UrlRepo) *UrlService {
 	}
 }
 
-// TODO: This is a very basic implementation.
-func (s *UrlService) generateShortUrl() string {
-	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-	b := make([]byte, 6)
-	for i := range b {
-		b[i] = charset[rand.Intn(len(charset))]
-	}
-	return string(b)
-}
-
 func (s *UrlService) ShortenUrl(url string) (string, error) {
-	shortUrl := s.generateShortUrl()
+	id := Base10ToBase62(Base16ToBase10(bson.NewObjectID().Hex()))
+	shortUrl := id
+
 	record, err := s.repo.InsertUrlRecord(&repo.UrlRecord{
+		ID:          id,
 		OriginalUrl: url,
 		ShortUrl:    shortUrl,
 	})
+
 	if err != nil {
 		log.Printf("ERROR: Failed to insert URL record: %v", err)
 		return "", fmt.Errorf("failed to store URL in database: %w", err)

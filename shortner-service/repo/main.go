@@ -12,6 +12,7 @@ type UrlRepo struct {
 }
 
 type UrlRecord struct {
+	ID          string `bson:"_id,omitempty"`
 	OriginalUrl string `bson:"original_url"`
 	ShortUrl    string `bson:"short_url"`
 }
