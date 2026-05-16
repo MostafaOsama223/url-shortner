@@ -1,7 +1,7 @@
 package service
 
 import (
-	"shortner-service/repo"
+	"github.com/MostafaOsama223/shortner-service/repo"
 )
 
 type Service interface {

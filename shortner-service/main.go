@@ -5,10 +5,10 @@ import (
 	"log"
 	"os"
 
-	"shortner-service/api"
-	"shortner-service/database"
-	"shortner-service/repo"
-	"shortner-service/service"
+	"github.com/MostafaOsama223/shortner-service/api"
+	"github.com/MostafaOsama223/shortner-service/database"
+	"github.com/MostafaOsama223/shortner-service/repo"
+	"github.com/MostafaOsama223/shortner-service/service"
 
 	"github.com/joho/godotenv"
 )

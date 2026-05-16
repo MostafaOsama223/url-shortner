@@ -1,7 +1,7 @@
 package repo
 
 import (
-	"shortner-service/database"
+	"github.com/MostafaOsama223/shortner-service/database"
 )
 
 type Repo interface {

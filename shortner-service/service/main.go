@@ -3,7 +3,8 @@ package service
 import (
 	"fmt"
 	"log"
-	"shortner-service/repo"
+
+	"github.com/MostafaOsama223/shortner-service/repo"
 
 	"go.mongodb.org/mongo-driver/v2/bson"
 )

@@ -2,7 +2,8 @@ package repo
 
 import (
 	"fmt"
-	"shortner-service/database"
+
+	"github.com/MostafaOsama223/shortner-service/database"
 
 	"go.mongodb.org/mongo-driver/v2/bson"
 )

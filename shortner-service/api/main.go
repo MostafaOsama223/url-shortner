@@ -1,7 +1,7 @@
 package api
 
 import (
-	"shortner-service/service"
+	"github.com/MostafaOsama223/shortner-service/service"
 
 	"github.com/gin-gonic/gin"
 )
