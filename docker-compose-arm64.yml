@@ -2,14 +2,43 @@ services:
   mongodb:
     image: arm64v8/mongo:8.3-noble
     container_name: mongodb
+    restart: unless-stopped
     ports:
       - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-    restart: unless-stopped
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - mongodb_network
+    command: ["mongod", "--bind_ip_all"]
+    healthcheck:
+      test:
+        - CMD
+        - mongosh
+        - 'mongodb://localhost:27017/admin'
+        - '--eval=db.runCommand({ping:1})'
+      retries: 3
+      timeout: 5s
+
+  shortner-service:
+    build: 
+      context: ./shortner-service
+      platform: linux/arm64
+    container_name: shortner-service
+    ports:
+      - "8080:8080"
+    environment:
+      MONGO_URI: mongodb://root:example@mongodb:27017
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    networks:
+      - mongodb_network
+
+networks:
+  mongodb_network:
 
 volumes:
   mongodb_data:
