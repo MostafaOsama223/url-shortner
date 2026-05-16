@@ -25,7 +25,8 @@ services:
   shortner-service:
     build: 
       context: ./shortner-service
-      platform: linux/arm64
+      platforms:
+        - linux/amd64
     container_name: shortner-service
     ports:
       - "8080:8080"
